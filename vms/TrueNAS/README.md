@@ -89,37 +89,85 @@ After switching to SeaBIOS and q35, the VM successfully reached the GRUB screen 
 
 ---
 
+# TrueNAS VM Setup on Proxmox
+
+This guide documents the installation and configuration of TrueNAS SCALE on a Proxmox virtual machine (VM). It includes enabling virtualization features, disk setup, ZFS pool creation, user management, and network drive mapping. Screenshots are provided for each step to demonstrate the full configuration process.
+
+---
+
 ## Screenshots
 
-**Pic 1 – IOMMU Check Enabled**  
-![Pic 1 – IOMMU Check Enabled](vms/TrueNAS/images/iommu-check-enabled.png)
+### Pic 1 – IOMMU Check Enabled in Proxmox BIOS
+Enables virtualization passthrough necessary for SATA controller passthrough.
 
-**Pic 2 – Added USB Device**  
-![Pic 2 – Added USB Device](vms/TrueNAS/images/added-usb-device.png)
+![Pic 1 – IOMMU Check Enabled](images/iommu-check-enabled.png)
 
-**Pic 3 – Boot Troubleshoot: Remove IDE, Add SATA**  
-![Pic 3 – Boot Troubleshoot Remove IDE Add SATA](vms/TrueNAS/images/boot-troubleshoot-remove-ide-add-sata.png)
+---
 
-**Pic 4 – GRUB Menu**  
-![Pic 4 – GRUB](vms/TrueNAS/images/grub.png)
+### Pic 2 – Added USB Device in Proxmox VM Hardware Tab
+Adds the installer USB device to the TrueNAS VM.
 
-**Pic 5 – Disk Setup in TrueNAS**  
-![Pic 5 – Disk Setup](vms/TrueNAS/images/disk-setup.png)
+![Pic 2 – Added USB Device](images/added-usb-device.png)
 
-**Pic 6 – IP Config in Web UI**  
-![Pic 6 – IP Config](vms/TrueNAS/images/ip-config.png)
+---
 
-**Pic 7 – Create ZFS Pool**  
-![Pic 7 – Create Pool](vms/TrueNAS/images/create-pool.png)
+### Pic 3 – Boot Troubleshoot: Remove IDE, Add SATA
+Fixes boot issues by removing the IDE controller and adding a SATA controller.
 
-**Pic 8 – Dataset Configuration**  
-![Pic 8 – Datasets Config](vms/TrueNAS/images/datasets-config.png)
+![Pic 3 – Boot Troubleshoot: Remove IDE, Add SATA](images/boot-troubleshoot-remove-ide-add-sata.png)
 
-**Pic 9 – Local User Creation**  
-![Pic 9 – Local User Create](vms/TrueNAS/images/local-user-create.png)
+---
 
-**Pic 10 – Set Dataset Permissions**  
-![Pic 10 – Directory Permissions](vms/TrueNAS/images/directory-permissiosn.png)
+### Pic 4 – GRUB Menu of TrueNAS SCALE
+Initial boot screen after successful installation.
 
-**Pic 11 – Windows Mapped Network Drive**  
-![Pic 11 – Map Network Drive](vms/TrueNAS/images/map-network-drive.png)
+![Pic 4 – GRUB](images/grub.png)
+
+---
+
+### Pic 5 – Disk Setup in TrueNAS
+Lists the available disks for ZFS pool configuration.
+
+![Pic 5 – Disk Setup](images/disk-setup.png)
+
+---
+
+### Pic 6 – IP Address Configuration in TrueNAS Web UI
+Assigns static IP to the NAS VM inside the web UI.
+
+![Pic 6 – IP Config](images/ip-config.png)
+
+---
+
+### Pic 7 – Create ZFS Pool
+Creates a new ZFS storage pool using the attached disk.
+
+![Pic 7 – Create Pool](images/create-pool.png)
+
+---
+
+### Pic 8 – Dataset Configuration
+Defines datasets within the ZFS pool for organizational and access control purposes.
+
+![Pic 8 – Datasets Config](images/datasets-config.png)
+
+---
+
+### Pic 9 – Local User Creation
+Adds a new NAS user to authenticate SMB access.
+
+![Pic 9 – Local User Create](images/local-user-create.png)
+
+---
+
+### Pic 10 – Set Dataset Permissions for NAS User
+Assigns proper permissions for the created user on the dataset.
+
+![Pic 10 – Directory Permissions](images/directory-permissions.png)
+
+---
+
+### Pic 11 – Windows Mapped Network Drive
+Maps the NAS share to a Windows drive letter for convenient access.
+
+![Pic 11 – Map Network Drive](images/map-network-drive.png)
