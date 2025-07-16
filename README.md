@@ -12,10 +12,12 @@ This repo serves as a visual and technical index of all infrastructure component
 
 ## Installed Systems
 
-| Name                 | Type      | OS/Platform   | Purpose              | Linked Project      |
-|----------------------|-----------|---------------|-----------------------|---------------------|
-| Debian NAS Container | Container | Debian 12     | LAN file sharing      | [project-nas](https://github.com/Tariq-homelab/project-nas) |
-| Windows Server 2022  | VM        | Windows       | Active Directory test | [project-ad](https://github.com/Tariq-homelab/project-ad) |
-| Ubuntu Monitor VM    | VM        | Ubuntu Server | Monitoring & Logging  | [project-monitoring](https://github.com/Tariq-homelab/project-monitoring) |
-
+| Name                | Type      | OS/Platform     | Purpose                 | Linked Project                                 |
+|---------------------|-----------|------------------|--------------------------|------------------------------------------------|
+| Debian NAS Container| Container | Debian 12        | LAN file sharing         | [project-nas](https://github.com/Tariq-homelab/project-nas) |
+| Windows Server 2022 | VM        | Windows          | Active Directory test    | [project-ad](https://github.com/Tariq-homelab/project-ad)   |
+| Ubuntu Monitor VM   | VM        | Ubuntu Server    | Monitoring & Logging     | [project-monitoring](https://github.com/Tariq-homelab/project-monitoring) |
+| TrueNAS VM          | VM        | TrueNAS SCALE    | ZFS file server          | [truenas](./truenas/README.md) |
 *This table will be updated as new systems are added.*
+
+<!-- test line -->
