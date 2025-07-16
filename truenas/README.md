@@ -1,173 +1,126 @@
-# Project NAS – Part 1: Setup & Storage
+# Project NAS – TrueNAS SCALE Setup & File Sharing
 
-This phase of the project focuses on setting up a resilient, LAN-accessible NAS using Proxmox and TrueNAS SCALE in a virtualized homelab.
+This project documents the process of setting up a reliable and accessible NAS using TrueNAS SCALE inside a Proxmox virtual machine. The goal was to create a basic home lab storage solution with SMB sharing and user-based access, while also learning how to work with ZFS, virtualization, and network configuration in a more hands-on way.
 
-## Skills Gained
+---
 
-By completing this phase, I gained practical experience in the following areas:
+## Skills Applied and Learned
 
-- **Virtualization & Hypervisor Management**  
-  Creating and configuring a TrueNAS VM in Proxmox with optimal performance settings.
+- **Virtualization Basics**  
+  Setting up and managing a VM in Proxmox, adjusting BIOS settings, and troubleshooting compatibility issues.
 
-- **ZFS Storage & Pool Management**  
-  Creating a ZFS pool with compression and encryption, understanding VDEVs and datasets.
+- **ZFS Pool Configuration**  
+  Creating a storage pool using ZFS with compression and encryption enabled, while learning how datasets and VDEVs are structured.
 
-- **File Sharing (SMB/CIFS)**  
-  Setting up user-authenticated SMB shares for reliable file access across the LAN.
+- **File Sharing Over SMB**  
+  Configuring shared folders (datasets) with proper user authentication and mapping them in Windows.
 
-- **User Access & Windows Integration**  
-  Mapping network drives from Windows to TrueNAS shares with persistent authentication.
+- **User and Permission Management**  
+  Creating users inside TrueNAS and assigning appropriate access to datasets.
+
+- **Basic Networking**  
+  Assigning static IPs and making sure TrueNAS is reachable within the LAN.
 
 ---
 
 ## Step-by-Step Setup
 
-### 1. Enable IOMMU in BIOS and Proxmox
-Ensure that virtualization and IOMMU (SVM/VT-d) are enabled in BIOS. Then, enable IOMMU on the Proxmox host to allow PCI passthrough.  
-*(see Pic 1)*
+### 1. Enable IOMMU and Virtualization
+Enabled SVM/VT-d in BIOS and IOMMU support in Proxmox to allow passthrough of storage devices.
 
-### 2. Add USB Device to Proxmox VM
-Attach the external hard drive to the NAS VM by passing through the USB device in Proxmox hardware settings.  
-*(see Pic 2)*
+### 2. Attach External Drive to the VM
+Passed through a USB-connected external HDD to the TrueNAS VM via Proxmox’s hardware configuration tab.
 
-### 3. Fix Boot Order if Needed
-If TrueNAS fails to boot or stalls, try removing the IDE disk and re-adding it as a SATA disk in Proxmox.  
-*(see Pic 3)*
+### 3. Fix Boot Compatibility
+Initially had trouble booting TrueNAS using the default i440fx and OVMF BIOS. Switching to `q35` and SeaBIOS allowed it to boot properly.
 
-### 4. Boot Into TrueNAS Installer
-Launch the TrueNAS SCALE installer from the VM. Select the correct target disk and complete the installation.  
-*(see Pic 4)*
+### 4. Install TrueNAS SCALE
+Mounted the TrueNAS installer ISO in the VM, selected the right disk, and completed installation without issues.
 
-### 5. Verify Disks and Select Boot Disk
-Once installed, open the TrueNAS dashboard and verify that the boot disk and USB disk are both recognized.  
-*(see Pic 5)*
+### 5. Log Into Web UI & Configure Network
+Used the console to get the IP address, logged into the TrueNAS web UI, and set a static IP and hostname for consistency within the LAN.
 
-### 5.5 Access TrueNAS Web UI and Configure Network
-After reboot, log into the TrueNAS Web UI using the IP shown in the console. Configure static IP, DNS, and hostname to match your LAN plan.  
-*(see Pic 6)*
+### 6. Create ZFS Pool
+Created a single-disk pool with compression and encryption enabled. This was done using a USB drive just to test out the functionality.
 
-### 6. Create a ZFS Pool
-Create a new pool using the USB disk. Choose settings like compression (lz4) and encryption if desired.  
-*(see Pic 7)*
+### 7. Create Dataset
+Inside the pool, created a dataset where shared files would go. This allows for better permission control and future expansion.
 
-### 7. Create a Dataset
-Under the pool, create a new dataset to store files. This allows finer-grained control over permissions and sharing.  
-*(see Pic 8)*
-
-### 8. Create Local User
-Create a local user that will authenticate when connecting to the SMB share from Windows.  
-*(see Pic 9)*
+### 8. Add a Local User
+Created a dedicated user for network file access. This user will authenticate when connecting to SMB shares.
 
 ### 9. Set Dataset Permissions
-Assign the dataset's access rights to the newly created user. Set ownership and access flags properly.  
-*(see Pic 10)*
+Assigned ownership of the dataset to the new user and adjusted permission flags to allow file read/write access.
 
-### 10. Map Network Drive in Windows
-On a Windows client, use File Explorer to map the network drive. Enter the TrueNAS IP and shared folder path, and authenticate using the local user.  
-*(see Pic 11)*
+### 10. Map the Share in Windows
+Mapped the dataset as a network drive in Windows using the NAS IP and share name. Entered the TrueNAS user’s credentials and enabled persistent login.
 
 ---
 
-## Troubleshooting: Boot Failures with OVMF
+## Troubleshooting: Boot Failure on Default Settings
 
-During initial setup, the TrueNAS VM failed to boot when using:
+Originally tried installing with OVMF (UEFI) and the default i440fx machine type, but the VM would freeze or not reach the GRUB installer.
 
-- **BIOS:** OVMF (UEFI)  
-- **Machine Type:** i440fx (default)
-
-Several attempts with these configurations led to blank screens or failure to reach the installer.
-
-### ✅ Working Configuration (after testing)
+### What Worked:
 - **BIOS:** SeaBIOS  
 - **Machine Type:** q35
 
-After switching to SeaBIOS and q35, the VM successfully reached the GRUB screen and booted into the TrueNAS installer. This configuration was used for all subsequent steps in the project.
-
-📌 Notes:
-- SeaBIOS provided better compatibility with older bootloaders.
-- q35 exposes more modern PCI devices than i440fx and resolved passthrough issues.
+Switching to this combo resolved the boot issues.
 
 ---
 
-# TrueNAS VM Setup on Proxmox
+## Next Steps
 
-This guide documents the installation and configuration of TrueNAS SCALE on a Proxmox virtual machine (VM). It includes enabling virtualization features, disk setup, ZFS pool creation, user management, and network drive mapping. Screenshots are provided for each step to demonstrate the full configuration process.
+This project currently provides reliable local storage and authenticated file sharing over the LAN using TrueNAS SCALE. To expand its functionality and align more closely with best practices in backup and monitoring, the following improvements are planned:
+
+- **Automated Snapshots and Backups**  
+  Set up scheduled ZFS snapshots and explore simple backup options like sending data to another drive, VM, or remote host.
+
+- **Monitoring and Alerts**  
+  Add basic monitoring using built-in TrueNAS tools or external solutions like Zabbix, to help detect issues like disk failure or high usage.
+
+- **Secure Remote Access**  
+  Configure remote access using a VPN such as WireGuard or Tailscale, so files can be accessed safely without exposing SMB ports.
+
+- **Optional Cloud Backup**  
+  Experiment with syncing specific datasets (like photos or important documents) to cloud storage using tools like `rclone` or TrueNAS Cloud Sync. This would serve as a basic offsite backup, not a full cloud migration.
+
+- **File Sorting Scripts**  
+  Write simple automation scripts (e.g., in Python) to help organize media files on the NAS by year, type, or metadata.
 
 ---
 
 ## Screenshots
 
-### Pic 1 – IOMMU Check Enabled in Proxmox BIOS
-Enables virtualization passthrough necessary for SATA controller passthrough.
+### Pic 1 – IOMMU Check in Proxmox BIOS
+![Pic 1](images/iommu-check-enabled.png)
 
-![Pic 1 – IOMMU Check Enabled](images/iommu-check-enabled.png)
+### Pic 2 – USB Device Added in VM Hardware
+![Pic 2](images/added-usb-device.png)
 
----
+### Pic 3 – Switching IDE to SATA
+![Pic 3](images/boot-troubleshoot-remove-ide-add-sata.png)
 
-### Pic 2 – Added USB Device in Proxmox VM Hardware Tab
-Adds the installer USB device to the TrueNAS VM.
-
-![Pic 2 – Added USB Device](images/added-usb-device.png)
-
----
-
-### Pic 3 – Boot Troubleshoot: Remove IDE, Add SATA
-Fixes boot issues by removing the IDE controller and adding a SATA controller.
-
-![Pic 3 – Boot Troubleshoot: Remove IDE, Add SATA](images/boot-troubleshoot-remove-ide-add-sata.png)
-
----
-
-### Pic 4 – GRUB Menu of TrueNAS SCALE
-Initial boot screen after successful installation.
-
-![Pic 4 – GRUB](images/grub.png)
-
----
+### Pic 4 – GRUB Boot Screen
+![Pic 4](images/grub.png)
 
 ### Pic 5 – Disk Setup in TrueNAS
-Lists the available disks for ZFS pool configuration.
+![Pic 5](images/disk-setup.png)
 
-![Pic 5 – Disk Setup](images/disk-setup.png)
+### Pic 6 – Static IP Config in Web UI
+![Pic 6](images/ip-config.png)
 
----
+### Pic 7 – ZFS Pool Creation
+![Pic 7](images/create-pool.png)
 
-### Pic 6 – IP Address Configuration in TrueNAS Web UI
-Assigns static IP to the NAS VM inside the web UI.
+### Pic 8 – Dataset Creation
+![Pic 8](images/datasets-config.png)
 
-![Pic 6 – IP Config](images/ip-config.png)
+### Pic 9 – Local User Added
+![Pic 9](images/local-user-create.png)
 
----
+### Pic 10 – Dataset Permissions
+![Pic 10](images/directory-permissions.png)
 
-### Pic 7 – Create ZFS Pool
-Creates a new ZFS storage pool using the attached disk.
-
-![Pic 7 – Create Pool](images/create-pool.png)
-
----
-
-### Pic 8 – Dataset Configuration
-Defines datasets within the ZFS pool for organizational and access control purposes.
-
-![Pic 8 – Datasets Config](images/datasets-config.png)
-
----
-
-### Pic 9 – Local User Creation
-Adds a new NAS user to authenticate SMB access.
-
-![Pic 9 – Local User Create](images/local-user-create.png)
-
----
-
-### Pic 10 – Set Dataset Permissions for NAS User
-Assigns proper permissions for the created user on the dataset.
-
-![Pic 10 – Directory Permissions](images/directory-permissions.png)
-
----
-
-### Pic 11 – Windows Mapped Network Drive
-Maps the NAS share to a Windows drive letter for convenient access.
-
-![Pic 11 – Map Network Drive](images/map-network-drive.png)
+### Pic 11 – Windows Network Drive Mapping
+![Pic 11](images/map-network-drive.png)
