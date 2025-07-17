@@ -17,5 +17,5 @@ This repo serves as a visual and technical index of all infrastructure component
 | Debian VPN VM       | VM        | Debian 12         | WireGuard VPN server     | [debian-wireguard](./debian-wireguard/README.md)   |
 | Windows Server 2022 | VM        | Windows Server    | Active Directory test    | [winserver2022](./winserver2022/README.md)         |
 | Ubuntu Monitor VM   | VM        | Ubuntu Server     | Monitoring & Logging     | [project-monitoring](https://github.com/Tariq-homelab/project-monitoring) |
-| TrueNAS VM          | VM        | TrueNAS SCALE     | ZFS file server          | [truenas](./TrueNAS/README.md)                     |
+| TrueNAS VM          | VM        | TrueNAS SCALE     | ZFS file server          | [truenas](https://github.com/Tariq-homelab/vms-containers/tree/master/truenas)                     |
 
