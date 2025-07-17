@@ -90,19 +90,33 @@ Deploy a fully functional Windows Server 2022 VM on Proxmox for Active Directory
 ## Screenshots
 
 1. ![upload](images/upload-iso-to-proxmox.png) – Uploading ISO to Proxmox  
+
 2. ![create-vm](images/Create-VM.png) – VM creation wizard  
+
 3. ![os-tab](images/os-tab.png) – OS settings  
+
 4. ![system-tab](images/system-tab.png) – System settings (UEFI + Q35)  
+
 5. ![cpu-tab](images/cpu-tab.png) – CPU configuration  
+
 6. ![confirm-1](images/confirm-settings.png) – Pre-final confirmation  
+
 7. ![confirm-2](images/confirm-settings2.png) – VM summary confirmation  
+
 8. ![load-virtio](images/load-virtIO-drivers.png) – Load driver during Windows setup  
+
 9. ![choose-redhat](images/load-virtIO-drivers-choose-redhat.png) – Selecting Red Hat drivers  
+
 10. ![desktop](images/desktop-experience.png) – Choosing Desktop Experience  
+
 11. ![finish](images/finish-setup.png) – Completing setup  
+
 12. ![netkvm](images/netkvm.png) – Network driver selection  
+
 13. ![netkvm-install](images/netkvm-install.png) – Network driver installation  
+
 14. ![qemu](images/install-qemu-agent.png) – QEMU Guest Agent installer  
+
 15. ![desktop-final](images/winserver2022.png) – Final desktop view
 
 
