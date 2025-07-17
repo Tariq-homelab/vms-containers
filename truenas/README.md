@@ -124,3 +124,6 @@ This project currently provides reliable local storage and authenticated file sh
 
 ### Pic 11 – Windows Network Drive Mapping
 ![Pic 11](images/map-network-drive.png)
+
+### Pic 12 – Network Drive Mapping Confirmed  
+![Pic 12](images/network-drive-confirmed.png)
