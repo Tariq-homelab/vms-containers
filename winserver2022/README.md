@@ -89,35 +89,51 @@ Deploy a fully functional Windows Server 2022 VM on Proxmox for Active Directory
 
 ## Screenshots
 
-1. ![upload](images/upload-iso-to-proxmox.png) – Uploading ISO to Proxmox  
+1. **Uploading ISO to Proxmox**  
+   ![](images/upload-iso-to-proxmox.png)
 
-2. ![create-vm](images/Create-VM.png) – VM creation wizard  
+2. **VM creation wizard**  
+   ![](images/Create-VM.png)
 
-3. ![os-tab](images/os-tab.png) – OS settings  
+3. **OS settings**  
+   ![](images/os-tab.png)
 
-4. ![system-tab](images/system-tab.png) – System settings (UEFI + Q35)  
+4. **System settings (UEFI + Q35)**  
+   ![](images/system-tab.png)
 
-5. ![cpu-tab](images/cpu-tab.png) – CPU configuration  
+5. **CPU configuration**  
+   ![](images/cpu-tab.png)
 
-6. ![confirm-1](images/confirm-settings.png) – Pre-final confirmation  
+6. **Pre-final confirmation**  
+   ![](images/confirm-settings.png)
 
-7. ![confirm-2](images/confirm-settings2.png) – VM summary confirmation  
+7. **VM summary confirmation**  
+   ![](images/confirm-settings2.png)
 
-8. ![load-virtio](images/load-virtIO-drivers.png) – Load driver during Windows setup  
+8. **Load driver during Windows setup**  
+   ![](images/load-virtIO-drivers.png)
 
-9. ![choose-redhat](images/load-virtIO-drivers-choose-redhat.png) – Selecting Red Hat drivers  
+9. **Selecting Red Hat drivers**  
+   ![](images/load-virtIO-drivers-choose-redhat.png)
 
-10. ![desktop](images/desktop-experience.png) – Choosing Desktop Experience  
+10. **Choosing Desktop Experience**  
+    ![](images/desktop-experience.png)
 
-11. ![finish](images/finish-setup.png) – Completing setup  
+11. **Completing setup**  
+    ![](images/finish-setup.png)
 
-12. ![netkvm](images/netkvm.png) – Network driver selection  
+12. **Network driver selection**  
+    ![](images/netkvm.png)
 
-13. ![netkvm-install](images/netkvm-install.png) – Network driver installation  
+13. **Network driver installation**  
+    ![](images/netkvm-install.png)
 
-14. ![qemu](images/install-qemu-agent.png) – QEMU Guest Agent installer  
+14. **QEMU Guest Agent installer**  
+    ![](images/install-qemu-agent.png)
 
-15. ![desktop-final](images/winserver2022.png) – Final desktop view
+15. **Final desktop view**  
+    ![](images/winserver2022.png)
+
 
 
 ---
