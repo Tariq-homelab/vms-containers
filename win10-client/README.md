@@ -72,4 +72,4 @@ Set a static IP for this client VM to maintain consistent connectivity with the 
 
 Setting the DNS server to the AD DS host (`192.168.0.32`) ensures correct name resolution for domain services like `homelab.local`.
 
-<img src="images/07-Set-Static-IP-192.168.0.40.png" width="700"/>
+<img src="images/07-Set-Static-IP.png" width="700"/>
