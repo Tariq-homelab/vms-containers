@@ -10,11 +10,13 @@ Each entry includes:
 
 This repo serves as a visual and technical index of all infrastructure components.
 
-## Installed Systems
+## Installed / Related Repositories
 
-| Name               | Type      | OS/Platform     | Purpose                | Linked Project                                      |
-|--------------------|-----------|------------------|-------------------------|-----------------------------------------------------|
-| Debian VPN VM       | VM        | Debian 12         | WireGuard VPN server     | [wireguard](https://github.com/Tariq-homelab/wireguard/README.md)   |
-| Windows Server 2022 | VM        | Windows Server    | Active Directory test    | [winserver2022](./winserver2022/README.md)         |
-| TrueNAS VM          | VM        | TrueNAS SCALE     | ZFS file server          | [truenas](https://github.com/Tariq-homelab/truenas/README.md)                     |
+| Name             | Type | OS/Platform     | Purpose                    | Linked Project                                                  |
+|------------------|------|------------------|-----------------------------|------------------------------------------------------------------|
+| WireGuard VPN VM | VM   | Debian 12        | WireGuard VPN server        | [wireguard](https://github.com/Tariq-homelab/wireguard)         |
+| Windows Server 2022 | VM | Windows Server  | Active Directory test       | [winserver2022](winserver2022)                                  |
+| TrueNAS VM       | VM   | TrueNAS SCALE    | ZFS file server             | [truenas](https://github.com/Tariq-homelab/truenas)             |
+| Proxmox Host     | Host | Proxmox VE 8.4   | Hypervisor and VM platform  | [proxmox](proxmox)                                              |
+| Windows 10 Client| VM   | Windows 10       | Domain-joined test system   | [win10-client](win10-client)                                    |
 
